@@ -1,16 +1,5 @@
-// import {
-//   createPost,
-//   getAllPosts,
-//   getPostById,
-//   updatePost,
-//   deletePost
-// } from "./postController";
-
-// import {
-//   getAllTodo
-// } from "./todoController";
 const todoPath = require('./todoController');
-const { getAllTodo } = todoPath;
+const { getAllTodo,createTodo } = todoPath;
 
 const postPath = require('./postController');
 const { createPost,getAllPosts,getPostById,updatePost,deletePost } = postPath;
@@ -21,5 +10,7 @@ module.exports = {
   getPostById,
   updatePost,
   deletePost,
-  getAllTodo
+  //todo
+  getAllTodo,
+  createTodo
 };
