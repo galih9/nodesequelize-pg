@@ -1,20 +1,6 @@
 const models = require("../database/models");
 const { Op } = require("sequelize");
-
-const getPagination = (page, size) => {
-  const limit = size ? +size : 5;
-  const offset = page ? page * limit : 0;
-
-  return { limit, offset };
-};
-
-const getPagingData = (data, page, limit) => {
-  const { count: totalItems, rows: posts } = data;
-  const currentPage = page ? +page : 0;
-  const totalPages = Math.ceil(totalItems / limit);
-
-  return { totalItems, posts, totalPages, currentPage };
-};
+const { getPagination,getPagingData } = require('../utils')
 
 const createPost = async (req, res) => {
   try {
