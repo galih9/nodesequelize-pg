@@ -1,4 +1,20 @@
 const models = require("../database/models");
+const { Op } = require("sequelize");
+
+const getPagination = (page, size) => {
+  const limit = size ? +size : 5;
+  const offset = page ? page * limit : 0;
+
+  return { limit, offset };
+};
+
+const getPagingData = (data, page, limit) => {
+  const { count: totalItems, rows: posts } = data;
+  const currentPage = page ? +page : 0;
+  const totalPages = Math.ceil(totalItems / limit);
+
+  return { totalItems, posts, totalPages, currentPage };
+};
 
 const createPost = async (req, res) => {
   try {
@@ -13,20 +29,33 @@ const createPost = async (req, res) => {
 
 const getAllPosts = async (req, res) => {
   // console.log("uuwu")
+  const { page, size, title } = req.query;
+  var condition = title ? { title: { [Op.iLike]: `%${title}%` } } : null;
+
+  const { limit, offset } = getPagination(page, size);
+
   try {
-    const posts = await models.Post.findAll({
+    const posts = await models.Post.findAndCountAll({
+      where: condition,
+      limit: limit,
+      offset: offset,
       include: [
         {
           model: models.Comment,
-          as: "comments"
+          as: "comments",
+          required: false
         },
         {
           model: models.User,
-          as: "author"
+          as: "author",
+          required: false
         }
-      ]
+      ],
+      // distinc the comment and user
+      distinct: true
     });
-    return res.status(200).json({ posts });
+    const response = getPagingData(posts, page, limit);
+    return res.status(200).json({ response });
   } catch (error) {
     return res.status(500).send(error.message);
   }

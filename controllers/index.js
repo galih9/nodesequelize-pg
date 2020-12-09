@@ -1,8 +1,14 @@
 const todoPath = require('./todoController');
-const { getAllTodo,createTodo } = todoPath;
+const { getAllTodo,createTodo,getTodoByUser } = todoPath;
 
 const postPath = require('./postController');
 const { createPost,getAllPosts,getPostById,updatePost,deletePost } = postPath;
+
+const commentPath = require('./commentController');
+const { getAllComment,getCommentById } = commentPath;
+
+const userPath = require('./userController');
+const { getAllUser,updateUser } = userPath;
 
 module.exports = {
   createPost,
@@ -12,5 +18,12 @@ module.exports = {
   deletePost,
   //todo
   getAllTodo,
-  createTodo
+  createTodo,
+  getTodoByUser,
+  //comment
+  getAllComment,
+  getCommentById,
+  //user
+  getAllUser,
+  updateUser
 };

@@ -7,7 +7,6 @@ var logger = log4js.getLogger();
 logger.level = "debug";
 // middlewares
 router.use(function (req, res, next) {
-    // console.log(req.url, "@", Date.now());
     logger.info(req.url, "@", Date.now())
     next();
 });
@@ -28,5 +27,22 @@ router.route('/posts/:postId')
 router.route('/todos')
     .get(controllers.getAllTodo)
     .post(controllers.createTodo);
+
+router.route('/todos/:userId')
+    .get(controllers.getTodoByUser);
+
+// comments
+router.route('/comments')
+    .get(controllers.getAllComment)
+
+router.route('/comments/:commentId')
+    .get(controllers.getCommentById)
+
+// user
+router.route('/users')
+    .get(controllers.getAllUser)
+
+router.route('/users/:userId')
+    .put(controllers.updateUser)
 
 module.exports = router;
