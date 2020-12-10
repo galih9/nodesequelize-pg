@@ -16,9 +16,11 @@ const createPost = async (req, res) => {
 const getAllPosts = async (req, res) => {
   // console.log("uuwu")
   const { page, size, title } = req.query;
+  // declare starter number for pagination
+  let crpage = page - 1;
   var condition = title ? { title: { [Op.iLike]: `%${title}%` } } : null;
 
-  const { limit, offset } = getPagination(page, size);
+  const { limit, offset } = getPagination(crpage, size);
 
   try {
     const posts = await models.Post.findAndCountAll({
@@ -41,7 +43,7 @@ const getAllPosts = async (req, res) => {
       distinct: true
     });
     const response = getPagingData(posts, page, limit);
-    return res.status(200).json({ response });
+    return res.status(200).json(response);
   } catch (error) {
     return res.status(500).send(error.message);
   }
