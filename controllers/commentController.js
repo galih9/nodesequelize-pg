@@ -1,6 +1,6 @@
 const models = require('../database/models');
 
-const getAllComment = async (req, res) => {
+exports.getAllComment = async (req, res) => {
     try {
         const comment = await models.Comment.findAll();
         // console.log(comment)
@@ -10,7 +10,7 @@ const getAllComment = async (req, res) => {
     }
 }
 
-const getCommentById = async (req, res) => {
+exports.getCommentById = async (req, res) => {
     try {
         const { commentId } = req.params;
         const comment = await models.Comment.findOne({
@@ -23,7 +23,7 @@ const getCommentById = async (req, res) => {
     }
 }
 
-module.exports = {
-    getAllComment,
-    getCommentById
-}
+// module.exports = {
+//     getAllComment,
+//     getCommentById
+// }

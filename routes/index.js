@@ -6,6 +6,7 @@ var log4js = require("log4js");
 var logger = log4js.getLogger();
 logger.level = "debug";
 // middlewares
+const { checkDuplicateUserEmail,verifyToken } = require('../middleware')
 router.use(function (req, res, next) {
     logger.info(req.url, "@", Date.now())
     next();
@@ -25,11 +26,11 @@ router.route('/posts/:postId')
 
 // todos
 router.route('/todos')
-    .get(controllers.getAllTodo)
+    .get(verifyToken,controllers.getAllTodo)
     .post(controllers.createTodo);
 
-router.route('/todos/:userId')
-    .get(controllers.getTodoByUser);
+router.route('/todos/:todoId')
+    .get(controllers.getTodoById);
 
 // comments
 router.route('/comments')
@@ -44,5 +45,9 @@ router.route('/users')
 
 router.route('/users/:userId')
     .put(controllers.updateUser)
+
+// auth
+router.route('/login').post(controllers.signIn)
+router.route('/register').post(checkDuplicateUserEmail, controllers.signUp)
 
 module.exports = router;

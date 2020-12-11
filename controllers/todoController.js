@@ -16,6 +16,18 @@ const getAllTodo = async (req, res) => {
     }
 }
 
+const getTodoById = async (req,res) => {
+    try {
+        const { todoId } = req.params;
+        const todo = await models.Todo.findOne({
+            where: { id: todoId}
+        })
+        return res.status(200).json({ todo })
+    } catch (error) {
+        return res.status(500).json(error.message)
+    }
+}
+
 const createTodo = async (req, res) => {
     try {
         const todo = await models.Todo.create(req.body);
@@ -46,5 +58,6 @@ const getTodoByUser = async (req, res) => {
 module.exports = {
     getAllTodo,
     createTodo,
-    getTodoByUser
+    getTodoByUser,
+    getTodoById
 }
