@@ -1,7 +1,7 @@
 const { getAllTodo, createTodo, getTodoByUser, getTodoById } = require('./todoController');
 const { createPost, getAllPosts, getPostById, updatePost, deletePost } = require('./postController');
 const { getAllComment, getCommentById } = require('./commentController');
-const { getAllUser, updateUser } = require('./userController');
+const { getAllUser, updateUser, getUserById } = require('./userController');
 const { signIn,signUp } = require('./authController')
 
 module.exports = {
@@ -21,6 +21,7 @@ module.exports = {
   //user
   getAllUser,
   updateUser,
+  getUserById,
   // auth
   signIn,
   signUp

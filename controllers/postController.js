@@ -1,6 +1,6 @@
 const models = require("../database/models");
 const { Op } = require("sequelize");
-const { getPagination,getPagingData } = require('../utils')
+const { getPagination,getPagingData } = require('../utils');
 
 const createPost = async (req, res) => {
   try {

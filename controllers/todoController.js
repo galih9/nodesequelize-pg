@@ -1,8 +1,17 @@
 const models = require("../database/models");
+const { getPagination,getPagingData } = require('../utils');
 
 const getAllTodo = async (req, res) => {
+    const { page, size, title } = req.query;
+    let crpage = page - 1;
+    var condition = title ? { title: { [Op.iLike]: `%${title}%` } } : null;
+    const { limit, offset } = getPagination(crpage, size);
     try {
-        const todos = await models.Todo.findAll({
+        const todos = await models.Todo.findAndCountAll({
+            where: condition,
+            limit: limit,
+            offset: offset,
+            distict: true,
             include: [
                 {
                     model: models.User,
@@ -10,17 +19,18 @@ const getAllTodo = async (req, res) => {
                 }
             ]
         })
-        return res.status(200).json({ todos });
+        const response = getPagingData(todos, page, limit);
+        return res.status(200).json(response);
     } catch (error) {
         return res.status(500).send(error.message)
     }
 }
 
-const getTodoById = async (req,res) => {
+const getTodoById = async (req, res) => {
     try {
         const { todoId } = req.params;
         const todo = await models.Todo.findOne({
-            where: { id: todoId}
+            where: { id: todoId }
         })
         return res.status(200).json({ todo })
     } catch (error) {
