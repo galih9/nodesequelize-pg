@@ -3,6 +3,7 @@ const models = require('../database/models');
 const config = require("../database/config/authConfig");
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
+const { Op } = require("sequelize");
 
 const signUp = async (req, res) => {
     // Save User to Database
@@ -21,7 +22,9 @@ const signIn = async (req, res) => {
     try {
         await models.User.findOne({
             where: {
-                name: req.body.name
+                email: {
+                    [Op.iLike]: '%'+req.body.email
+                }
             }
         }).then(user => {
             if (!user) {
@@ -35,10 +38,12 @@ const signIn = async (req, res) => {
             var token = jwt.sign({ id: user.id }, config.secret, {
                 expiresIn: 86400 // 24 hours
             });
+            console.log(req.body, user.password)
             if (!passwordIsValid) {
                 return res.status(401).json({
                     accessToken: null,
-                    message: "Invalid Password!"
+                    message: "Invalid Password!",
+                    debug: passwordIsValid
                 })
             }
             return res.status(200).json({
@@ -50,6 +55,7 @@ const signIn = async (req, res) => {
 
         })
     } catch (error) {
+        console.log(error)
         return res.status(500).json({ error });
     }
 

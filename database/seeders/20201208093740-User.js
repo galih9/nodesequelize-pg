@@ -5,14 +5,14 @@ module.exports = {
       {
         name: 'Jane Doe',
         email: 'janedoe@example.com',
-        password: '',
+        password: '$2a$08$Vl0W41rokaRVc7/byjPg9.tabcy0uwJjRiW8nWvDsm/htPlsq/Z9a',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         name: 'Jon Doe',
         email: 'jondoe@example.com',
-        password: '',
+        password: '$2a$08$Vl0W41rokaRVc7/byjPg9.tabcy0uwJjRiW8nWvDsm/htPlsq/Z9a',
         createdAt: new Date(),
         updatedAt: new Date(),
       },

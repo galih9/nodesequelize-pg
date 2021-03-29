@@ -2,7 +2,11 @@
 module.exports = (sequelize, DataTypes) => {
   const Todo = sequelize.define('Todo', {
     todo_name: DataTypes.STRING,
-    userId: DataTypes.INTEGER
+    userId: DataTypes.INTEGER,
+    complete: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    }
   }, {});
   Todo.associate = function(models) {
     // associations can be defined here

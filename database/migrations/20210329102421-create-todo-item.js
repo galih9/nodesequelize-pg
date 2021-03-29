@@ -1,22 +1,24 @@
 'use strict';
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Todos', {
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.createTable('TodoItems', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      todo_name: {
+      description: {
         type: Sequelize.STRING
       },
-      userId: {
+      location: {
+        type: Sequelize.STRING
+      },
+      story: {
         type: Sequelize.INTEGER
       },
-      complete: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false,
+      image: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
@@ -28,7 +30,7 @@ module.exports = {
       }
     });
   },
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Todos');
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.dropTable('TodoItems');
   }
 };
