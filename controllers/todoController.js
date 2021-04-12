@@ -1,5 +1,5 @@
 const models = require("../database/models");
-const { getPagination,getPagingData } = require('../utils');
+const { getPagination, getPagingData } = require('../utils');
 
 const getAllTodo = async (req, res) => {
     const { page, size, title } = req.query;
@@ -65,9 +65,26 @@ const getTodoByUser = async (req, res) => {
     }
 }
 
+const completeTodo = async (req, res) => {
+    try {
+        const { postId } = req.params;
+        const [updated] = await models.Post.update(req.body, {
+            where: { id: postId }
+        });
+        if (updated) {
+            const updatedPost = await models.Post.findOne({ where: { id: postId } });
+            return res.status(200).json({ post: updatedPost });
+        }
+        throw new Error("Post not found");
+    } catch (error) {
+        return res.status(500).send(error.message);
+    }
+}
+
 module.exports = {
     getAllTodo,
     createTodo,
     getTodoByUser,
-    getTodoById
+    getTodoById,
+    completeTodo
 }

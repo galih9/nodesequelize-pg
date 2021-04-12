@@ -1,4 +1,4 @@
-const { getAllTodo, createTodo, getTodoByUser, getTodoById } = require('./todoController');
+const { getAllTodo, createTodo, getTodoByUser, getTodoById, completeTodo } = require('./todoController');
 const { createPost, getAllPosts, getPostById, updatePost, deletePost } = require('./postController');
 const { getAllComment, getCommentById } = require('./commentController');
 const { getAllUser, updateUser, getUserById } = require('./userController');
@@ -15,6 +15,7 @@ module.exports = {
   createTodo,
   getTodoByUser,
   getTodoById,
+  completeTodo,
   //comment
   getAllComment,
   getCommentById,

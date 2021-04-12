@@ -40,6 +40,7 @@ router.route('/todos')
     .post(verifyToken, controllers.createTodo);
 
 router.route('/todos/:todoId')
+    .put(verifyToken,controllers.completeTodo)
     .get(verifyToken, controllers.getTodoById);
 
 // comments

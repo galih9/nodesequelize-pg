@@ -1,11 +1,16 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Todo = sequelize.define('Todo', {
-    todo_name: DataTypes.STRING,
+    name: DataTypes.STRING,
+    description: DataTypes.STRING,
+    story_points: DataTypes.STRING,
+    location: DataTypes.STRING,
+    image: DataTypes.STRING,
     userId: DataTypes.INTEGER,
-    complete: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
+    status: DataTypes.INTEGER,
+    completed: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
     }
   }, {});
   Todo.associate = function(models) {

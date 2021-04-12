@@ -8,15 +8,34 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      todo_name: {
+      name: {
         type: Sequelize.STRING
+      },
+      description: {
+        type: Sequelize.STRING
+      },
+      image: {
+        type: Sequelize.STRING
+      },
+      location: {
+        type: Sequelize.STRING
+      },
+      story_points: {
+        type: Sequelize.INTEGER
+      },
+      status: {
+        type: Sequelize.INTEGER
       },
       userId: {
         type: Sequelize.INTEGER
       },
-      complete: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false,
+      completed: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+      },
+      date: {
+        allowNull: false,
+        type: Sequelize.DATE
       },
       createdAt: {
         allowNull: false,

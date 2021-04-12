@@ -17,13 +17,27 @@ module.exports = {
       [
         {
           userId: 1,
-          todo_name: 'Ini buat test',
+          name: 'Ini buat test',
+          description: 'Description',
+          image: '',
+          location: '',
+          story_points: 12,
+          status: 0,
+          completed: 0,
+          date: new Date(),
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
           userId: 2,
-          todo_name: 'Ini buat cek',
+          name: 'Ini buat cek',
+          description: 'Description',
+          image: '',
+          location: '',
+          story_points: 22,
+          status: 0,
+          completed: 0,
+          date: new Date(),
           createdAt: new Date(),
           updatedAt: new Date()
         }
